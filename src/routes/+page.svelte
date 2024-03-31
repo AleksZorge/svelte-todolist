@@ -1,2 +1,15 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<main>
+  <section class="todo">
+    <form>
+      <input type="text" />
+      <button> Add </button>
+    </form>
+    <ul class="tasks">
+      <li class="task">
+        <p class="task-text"></p>
+        <button class="task-btn-execute"></button>
+        <button class="task-btn-delete"></button>
+      </li>
+    </ul>
+  </section>
+</main>
