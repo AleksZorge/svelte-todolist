@@ -104,9 +104,9 @@
   }
   .tasks {
     min-height: 100px;
+    padding: 0px;
   }
   .task {
-    margin: 10px 0px;
     display: flex;
   }
   .task-text {
