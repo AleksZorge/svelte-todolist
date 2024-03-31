@@ -116,6 +116,7 @@
     margin: 0px 5px;
   }
   .task-btn {
+    padding: 0px;
     width: 25px;
     height: 25px;
     border: 1px solid rgb(167, 58, 58);
