@@ -1,15 +1,59 @@
+<script>
+  let todoList = [];
+  let task = "";
+
+  function handleAddTask() {
+    todoList = [
+      {
+        task: task,
+        status: "pending",
+      },
+      ...todoList,
+    ];
+    task = "";
+  }
+  function handleExecuteTask(index) {
+    todoList[index].status = "completed";
+    todoList = [...todoList];
+  }
+  function handleRemoveTask(index) {
+    todoList.splice(index, 1);
+    todoList = [...todoList];
+  }
+</script>
+
 <main>
   <section class="todo">
     <form class="todo-form">
-      <input type="text" class="todo-input" />
-      <button class="todo-add"> Add </button>
+      <input type="text" class="todo-input" bind:value={task} />
+      <button class="todo-add" on:click={handleAddTask}> Add </button>
     </form>
     <ul class="tasks">
-      <li class="task">
-        <p class="task-text"></p>
-        <button class="task-btn task-btn-execute">&#10004;</button>
-        <button class="task-btn task-btn-delete">&#10006;</button>
-      </li>
+      {#each todoList as todo, i}
+        <li class="task">
+          <p
+            class="task-text {todo.status == 'completed'
+              ? 'task-text-crossed'
+              : ''}"
+          >
+            {todo.task}
+          </p>
+          <button
+            class="task-btn {todo.status == 'completed'
+              ? 'task-btn-active'
+              : ''}"
+            on:click={() => {
+              handleExecuteTask(i);
+            }}>&#10004;</button
+          >
+          <button
+            class="task-btn"
+            on:click={() => {
+              handleRemoveTask(i);
+            }}>&#10006;</button
+          >
+        </li>
+      {/each}
     </ul>
   </section>
 </main>
@@ -48,6 +92,7 @@
   }
   .todo-add {
     margin: 20px 0px;
+    font-size: 1rem;
     border: 1px solid rgb(167, 58, 58);
     height: 40px;
     outline: none;
@@ -57,7 +102,6 @@
     color: rgb(167, 58, 58);
     cursor: pointer;
   }
-
   .tasks {
     min-height: 100px;
   }
@@ -65,9 +109,11 @@
     margin: 10px 0px;
     display: flex;
   }
-
   .task-text {
     flex: 1;
+    color: #f5f5f5;
+    font-size: 1.25rem;
+    margin: 0px 5px;
   }
   .task-btn {
     width: 25px;
@@ -77,5 +123,13 @@
     border-radius: 50%;
     margin: 0px 5px;
     cursor: pointer;
+  }
+  .task-btn-active {
+    background: rgb(167, 58, 58);
+    color: #f5f5f5;
+  }
+  .task-text-crossed {
+    text-decoration: line-through;
+    text-decoration-color: rgb(167, 58, 58);
   }
 </style>
